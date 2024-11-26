@@ -39,13 +39,12 @@ namespace Server
 			GameRoom room = RoomManager.Instance.Add(1);
 			TickRoom(room, 50);
 
-            // DNS (Domain Name System)
-			string host = Dns.GetHostName();
-			IPHostEntry ipHost = Dns.GetHostEntry(host);
-			IPAddress ipAddress = ipHost.AddressList[0];
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddress = ipHost.AddressList[0];
             IPEndPoint endPoint = new IPEndPoint(ipAddress, 8000);
 
-			_listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
+            _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
 			Console.WriteLine("Listening... IPEndPoint: " + endPoint.ToString());
 
 			//FlushRoom();
